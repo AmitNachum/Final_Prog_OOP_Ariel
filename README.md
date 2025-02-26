@@ -11,7 +11,7 @@ It implements several **design patterns** and follows **OOP principles** to ensu
 2. **Ensure you have Java installed** (Java 17 or later).
 3. **Compile the project using the terminal**:
    ```sh
-   java Main
+   javac Main.java
    ```
 4. **Run the project From the command Line**:
    ```sh
