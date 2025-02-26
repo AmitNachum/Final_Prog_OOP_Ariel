@@ -13,6 +13,10 @@ It implements several **design patterns** and follows **OOP principles** to ensu
    ```sh
    java Main
    ```
+4. **Run the project From the command Line**:
+   ```sh
+   java Main
+   ```
    **Note:** Running the application from an IDE may cause issues with password masking.
 
 ## Usage Instructions
