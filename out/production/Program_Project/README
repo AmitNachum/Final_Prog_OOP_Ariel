@@ -1,0 +1,16 @@
+Real Estate System,
+
+Write date: 27.02.2025
+Authors: Amit Nachum.
+
+This program is aking for user and password.
+Default user is: amit
+default password is: amitamit
+
+Execution Program.
+Execution program is Baseline/Main
+
+Password hiding in IDE will not works since,
+this input hase been implemented using console package.
+If running from IDE
+
