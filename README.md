@@ -34,10 +34,6 @@ Use the following test credentials:
 **Password Masking Issue:**
 - The password masking (hiding input) **only works when running from the command line**.
 - In IDEs (like IntelliJ, Eclipse, or VS Code), the masking may not work due to how IDEs handle input streams.
-**Registering:**
-  -In case you cannot login with the defualt username and password,you can register yourself.
-  -The new username and the password would be saved in the `user_cerdentials.txt` file
-   in the `resources` package.
 
 ### 3. Features
 #### a. Property Management
@@ -88,6 +84,8 @@ java -jar junit-platform-console-standalone.jar --class-path out/production/Proj
 ## Notes
 - This system provides a **console-based** real estate management solution.
 - Password masking works **only in the command line (cmd/terminal)**.
+- For purchasing an Apartment for testing you can type the Avenue - 2 and the Street Number - 3.
+- Otherwise you are welcome to take a look at `properties.csv` located in the package `reasources`
 
 
 ---
