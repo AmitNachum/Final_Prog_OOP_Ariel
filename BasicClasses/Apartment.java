@@ -82,10 +82,13 @@ public class Apartment extends Property {
         return this.subCount;
     }
 
+    public void setSubCount(int subCount) {
+        this.subCount = subCount;
+    }
 
     @Override
     public String toString() {
-        return "Address: " + ((getFullAddress().size() >= 2) ? getFullAddress() : getAddress()) + ", Price per m²: " + pricePerSqM + "$, Size: " + size + " m², " +
+        return "Address: " + ((getFullAddress().size() > 2) ? getFullAddress() : getAddress()) + ", Price per m²: " + pricePerSqM + "$, Size: " + size + " m², " +
                 "Total Price : " + calculateTotalPrice() +"$" + " Status: " + (isSold ? "Sold" : "For Sale") + ", Sub-apartments: " + getSubCount();
     }
 

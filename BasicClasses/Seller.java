@@ -38,7 +38,7 @@ public class Seller extends User {
             throw new PropertyNotFoundException("Property with address " + address + " not found.");
         }
 
-        System.out.println("Property removed successfully: " + address);
+
 
     }
 

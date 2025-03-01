@@ -139,11 +139,11 @@ public class Main {
                             System.out.println("3. Search by Size Range");
                             System.out.println("4. Search by Availability");
                             System.out.println("5. Back to Main Menu");
-                            System.out.print("➡️ Enter your choice: ");
+                            System.out.print("➡️ Enter your choice(a number between 1 to 5): ");
 
                             if (!scanner.hasNextInt()) {
-                                scanner.next();
                                 System.out.println("❌ Invalid input. Enter a number.");
+                                scanner.nextLine();
                                 continue;
                             }
                             int searchChoice = scanner.nextInt();
@@ -153,10 +153,29 @@ public class Main {
                                 break;
 
                             System.out.print("📍 Enter Avenue: ");
+
+                            if (!scanner.hasNextInt()){
+                                System.out.println("❌ Invalid input. Enter a number.");
+                                scanner.nextLine();
+                                continue;
+                            }
                             int baseAvenue = scanner.nextInt();
+
                             System.out.print("📍 Enter Street: ");
+
+                            if (!scanner.hasNextInt()){
+                                System.out.println("❌ Invalid input. Enter a number.");
+                                scanner.nextLine();
+                                continue;
+                            }
                             int baseStreet = scanner.nextInt();
+
                             System.out.print("🎯 Enter Radius: ");
+                            if (!scanner.hasNextInt()){
+                                System.out.println("❌ Invalid input. Enter a number.");
+                                scanner.next();
+                                continue;
+                            }
                             int radius = scanner.nextInt();
                             scanner.nextLine();
 
@@ -202,7 +221,8 @@ public class Main {
                         while(true) {
                             System.out.print("📍 Enter the Avenue number or type 'quit' to return: ");
                              if (!scanner.hasNextInt()){
-                                 System.out.println("Invalid Choice");
+                                 System.out.println("❌ Invalid input. Enter a number.");
+                                 scanner.nextLine();
                                  continue;
                              }
                              avenue = scanner.nextInt();
@@ -217,7 +237,7 @@ public class Main {
                             System.out.println("📍Enter the Street number or type 'quit' to return: ");
                             if (!scanner.hasNextInt() ){
                                 System.out.println("Invalid Choice");
-                                scanner.next();
+                                scanner.nextLine();
                                 continue;
                             }
                             street = scanner.nextInt();
@@ -225,7 +245,7 @@ public class Main {
 
                             if (street <= 0){
                                 System.out.println("Invalid Choice");
-                                scanner.next();
+                                scanner.nextLine();
                                 continue;
                             }
 
@@ -236,6 +256,7 @@ public class Main {
                                 .filter(apartment -> apartment.getAddress().equals(address) && !apartment.isSold())
                                 .findFirst()
                                 .orElse(null);
+
 
                         if (selectedProperty == null) {
                             System.out.println("❌ Property not found or already sold.");
@@ -274,6 +295,7 @@ public class Main {
                                     System.out.println("❌ Invalid service choice. Try again.");
                                     continue;  // Go back to service selection
                                 }
+                                int subs = selectedProperty.getSubCount();
                                 selectedProperty = switch (serviceChoice) {
                                     case 1 -> new CleaningService(selectedProperty);
                                     case 2 -> new EveningService(selectedProperty);
@@ -282,6 +304,8 @@ public class Main {
                                     default -> selectedProperty;
                                 };
                                 selectedProperty.settingSeller(seller);
+                                selectedProperty.setSubCount(subs);
+                                selectedProperty.getFullAddress().addAll(address);
 
                                 break;
                             }
@@ -290,8 +314,8 @@ public class Main {
                                 System.out.println("Property Owner is :" + selectedProperty.getOwner().getName()+" The Seller");
                                     seller.sellProperty(broker, selectedProperty, buyer);
                                     updater.updatePropertyStatus(address, filePath);
-                                    System.out.println("✅ " + buyer.getName() + " has purchased: " + selectedProperty);
-                                    seller.updateBrokers(" Property at " + address + " has been sold.");
+                                    System.out.println("✅ " + buyer.getName() + " has purchased: " + selectedProperty.getFullAddress());
+                                    seller.updateBrokers(" Property at " + selectedProperty.getFullAddress() + " has been sold.");
                                 System.out.println("Property owner is :" +selectedProperty.getOwner().getName()+" The Client");
 
                             } catch (PropertyNotFoundException e) {
