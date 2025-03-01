@@ -9,19 +9,23 @@ import java.util.*;
 
 public class Seller extends User {
     private final Set<Broker> brokersSet;
-    private final List<Apartment> ownedProperties;
+    private final Set<Apartment> ownedProperties;
 
     public Seller(String name, String contactInfo) {
         super(name, contactInfo);
-        this.ownedProperties = new ArrayList<>();
+        this.ownedProperties = new HashSet<>();
         this.brokersSet = new HashSet<>();
     }
 
+
+
     public void listProperty(Apartment property, Broker broker) throws PropertyAlreadyExitsException {
-        if (!broker.addProperty(property)) {  // If property already exists, throw an exception
+        if (!broker.addProperty(property)) {
             throw new PropertyAlreadyExitsException("Property at " + property.getAddress() + " is already listed.");
         }
         this.ownedProperties.add(property);
+        property.settingSeller(this);
+
     }
 
 
@@ -49,9 +53,8 @@ public class Seller extends User {
         if (!sold) {
             throw new PropertyNotAvailableException("This apartment is already sold");
         }
-        String message = " The apartment at address - "+ apartment.getAddress() + " has been sold.";
+        apartment.setOwner(client);
         removeProperty(apartment.getAddress(),broker);
-        broker.update(message);
         return true;
     }
 

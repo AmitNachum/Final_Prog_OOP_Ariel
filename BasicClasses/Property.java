@@ -1,16 +1,25 @@
 package BasicClasses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Property {
     protected final int address;
     protected final int avenue;
     protected double pricePerSqM;
     protected final double size;
     protected boolean isSold;
+    protected List<Integer> fullAddress = new ArrayList<>();
 
 
 public int getAddNum(){
     return address;
 }
+
+    public List<Integer> getFullAddress() {
+        return fullAddress;
+    }
+
     public int getAvenue() {
         return avenue;
     }

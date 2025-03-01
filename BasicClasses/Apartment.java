@@ -3,15 +3,15 @@ package BasicClasses;
 import SearchStrategy.PriceRangeSearch;
 import Services.TransactionService;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 public class Apartment extends Property {
     private List<Apartment> subApartments;
     private Apartment parentApartment;
     private int subCount;
     private TransactionService additionalServices;
+    private User owner;
+
 
     public Apartment(int avenue, int address, double pricePerSqM, double size, boolean isSold) {
         super(address, avenue,pricePerSqM, size, isSold);
@@ -19,6 +19,18 @@ public class Apartment extends Property {
         this.parentApartment = null;
         this.subCount = 0;
     }
+
+
+    public void settingSeller(Seller seller){
+        this.owner = seller;
+    }
+
+
+
+    public void setOwner(Buyer client) {
+        this.owner = client;
+    }
+
 
 
     public Apartment getParentApartment() {
@@ -36,16 +48,9 @@ public class Apartment extends Property {
 
         if (!subApartments.contains(subApartment)) {
             subApartments.add(subApartment);
-
         }
 
-
-
-        for (Apartment nested : subApartment.getSubApartments()) {
-            addSubApartment(nested);
-        }
     }
-
 
 
 
@@ -71,21 +76,8 @@ public class Apartment extends Property {
     }
 
 
-    public void setSold(boolean sold) {
-        this.isSold = sold;
-    }
 
-    public double getPricePerSqM() {
-        return this.pricePerSqM;
-    }
 
-    public boolean isSold() {
-        return this.isSold;
-    }
-
-    public double getSize() {
-        return this.size;
-    }
     public int getSubCount(){
         return this.subCount;
     }
@@ -93,9 +85,10 @@ public class Apartment extends Property {
 
     @Override
     public String toString() {
-        return "Address: " + getAddress() + ", Price per m²: " + pricePerSqM + "$, Size: " + size + " m², " +
+        return "Address: " + ((getFullAddress().size() >= 2) ? getFullAddress() : getAddress()) + ", Price per m²: " + pricePerSqM + "$, Size: " + size + " m², " +
                 "Total Price : " + calculateTotalPrice() +"$" + " Status: " + (isSold ? "Sold" : "For Sale") + ", Sub-apartments: " + getSubCount();
     }
+
 
 
 
@@ -105,7 +98,7 @@ public class Apartment extends Property {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Apartment other = (Apartment) obj;
-        return Objects.equals(this.getAddress(), other.getAddress()); // Compare addresses
+        return Objects.equals(this.getAddress(), other.getAddress());
     }
 
     @Override
@@ -113,6 +106,9 @@ public class Apartment extends Property {
         return Objects.hash(this.getAddress());
     }
 
+    public User getOwner() {
+        return this.owner;
+    }
 
 
 }

@@ -1,16 +1,20 @@
 package BasicClasses;
 
 import java.io.Console;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class User {
     private final String name;
     private final String contactInfo;
+    private final Set<Apartment> ownedApartment;
 
 
 
     public User(String name,String contactInfo){
         this.name = name;
         this.contactInfo = contactInfo;
+        this.ownedApartment = new HashSet<>();
     }
 
 
@@ -21,16 +25,9 @@ public abstract class User {
         return this.contactInfo;
     }
 
-
-    public static void main(String...args){
-        Console con ;
-        if ((con = System.console()) != null){
-            char[] pass = con.readPassword("Enter Password:");
-            System.out.println("password: " + new String(pass));
-        }
-        else {
-            System.out.println("No console found....");
-        }
+    public Set<Apartment> getOwnedApartment() {
+        return ownedApartment;
     }
+
 }
 

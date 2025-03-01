@@ -5,6 +5,7 @@ import ObserverPattern.Observer;
 import java.util.List;
 
 public class Buyer extends User {
+
     public Buyer(String name, String contactInfo) {
         super(name, contactInfo);
     }

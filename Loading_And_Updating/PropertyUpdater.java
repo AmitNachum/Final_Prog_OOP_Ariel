@@ -34,7 +34,8 @@ public class PropertyUpdater {
                 List<Integer> propertyAddress = Arrays.stream(data[0].split("-"))
                         .map(Integer::parseInt)
                         .toList();
-                if (propertyAddress.equals(addressesToUpdate)) {
+
+                if (propertyAddress.subList(0,2).equals(addressesToUpdate)) {
                     data[3] = "Sold";
                     propertyFound = true;
                 }

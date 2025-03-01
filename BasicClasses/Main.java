@@ -244,7 +244,6 @@ public class Main {
                             int serviceChoice;
                             String yesOrNo;
 
-
                             while(true) {
                                 System.out.println("----Would you like An additional services?----\n[Y/N]");
                                 yesOrNo = scanner.next().trim().toUpperCase();
@@ -282,14 +281,18 @@ public class Main {
                                     case 4 -> new MovingService(selectedProperty);
                                     default -> selectedProperty;
                                 };
+                                selectedProperty.settingSeller(seller);
+
                                 break;
                             }
                             try {
 
+                                System.out.println("Property Owner is :" + selectedProperty.getOwner().getName()+" The Seller");
                                     seller.sellProperty(broker, selectedProperty, buyer);
                                     updater.updatePropertyStatus(address, filePath);
                                     System.out.println("✅ " + buyer.getName() + " has purchased: " + selectedProperty);
                                     seller.updateBrokers(" Property at " + address + " has been sold.");
+                                System.out.println("Property owner is :" +selectedProperty.getOwner().getName()+" The Client");
 
                             } catch (PropertyNotFoundException e) {
                                 System.out.println(e.getMessage());

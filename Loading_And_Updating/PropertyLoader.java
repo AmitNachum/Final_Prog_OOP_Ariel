@@ -41,11 +41,12 @@ public class PropertyLoader {
                         .map(Integer::parseInt)
                         .toList();
 
+
                 int size = data[1].equals("null") ? 0 : Integer.parseInt(data[1]);
                 double pricePerSquareMeter = data[2].equals("null") ? 0 : Double.parseDouble(data[2]);
 
                 String address = addressList.get(0) + "-" + addressList.get(1);
-                if (!asset.add(address)) { // Prevent duplicate assets
+                if (!asset.add(address)) {
                     continue;
                 }
 
@@ -66,20 +67,28 @@ public class PropertyLoader {
                 if (addressList.size() > 2) {
                     Apartment parentApartment = broker.getPropertyByAddress(parentKey);
                     if (parentApartment != null) {
-                        List<Integer> subApartmentAddress = new ArrayList<>(addressList.subList(0, 2));
+                        List<Integer> subApartmentAddress = new ArrayList<>(addressList);
+                        parentApartment.getFullAddress().addAll(addressList);
 
                         for (char num : subApt.toCharArray()) {
                             int subNum = Character.getNumericValue(num);
                             for (int i = 0; i < subNum; i++) {
                                 Apartment sub = ApartmentFactory.createApartment(subApartmentAddress, pricePerSquareMeter, size);
+                                if (!parentApartment.getSubApartments().contains(sub)){
                                 parentApartment.addSubApartment(sub);
+                                }
+                                subApartmentAddress.set(subApartmentAddress.size() - 1, subApartmentAddress.getLast());
                             }
                         }
                     }
                 }
+
             }
         } catch (IOException e) {
-            System.err.println("? Error loading properties: " + e.getMessage());
+            System.err.println(" Error loading properties: " + e.getMessage());
         }
     }
 }
+
+
+
