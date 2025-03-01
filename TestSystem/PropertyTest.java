@@ -13,6 +13,7 @@ public class PropertyTest {
     @BeforeEach
     void setUp() {
         property = new Apartment(10, 20, 3000.0, 50.0, false);
+
     }
 
     @Test
@@ -22,7 +23,8 @@ public class PropertyTest {
         assertEquals(20, ((Apartment) property).getAddress().get(1)); // Avenue
         assertEquals(3000.0, ((Apartment) property).getPricePerSqM());
         assertEquals(50.0, ((Apartment) property).getSize());
-        assertFalse(((Apartment) property).isSold());
+        assertFalse(property.isSold());
+        assertEquals(0,property.getFullAddress().size());
     }
 
     @Test
