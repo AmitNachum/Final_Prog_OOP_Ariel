@@ -17,12 +17,15 @@ public class Seller extends User {
         this.brokersSet = new HashSet<>();
     }
 
+
+
     public void listProperty(Apartment property, Broker broker) throws PropertyAlreadyExitsException {
-        if (!broker.addProperty(property)) {  // If property already exists, throw an exception
+        if (!broker.addProperty(property)) {
             throw new PropertyAlreadyExitsException("Property at " + property.getAddress() + " is already listed.");
         }
         this.ownedProperties.add(property);
         property.settingSeller(this);
+
     }
 
 
@@ -50,10 +53,8 @@ public class Seller extends User {
         if (!sold) {
             throw new PropertyNotAvailableException("This apartment is already sold");
         }
-        String message = " The apartment at address - "+ apartment.getAddress() + " has been sold.";
         apartment.setOwner(client);
         removeProperty(apartment.getAddress(),broker);
-        broker.update(message);
         return true;
     }
 

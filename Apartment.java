@@ -3,9 +3,7 @@ package BasicClasses;
 import SearchStrategy.PriceRangeSearch;
 import Services.TransactionService;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 public class Apartment extends Property {
     private List<Apartment> subApartments;
@@ -13,6 +11,7 @@ public class Apartment extends Property {
     private int subCount;
     private TransactionService additionalServices;
     private User owner;
+
 
     public Apartment(int avenue, int address, double pricePerSqM, double size, boolean isSold) {
         super(address, avenue,pricePerSqM, size, isSold);
@@ -49,14 +48,8 @@ public class Apartment extends Property {
 
         if (!subApartments.contains(subApartment)) {
             subApartments.add(subApartment);
-
         }
 
-
-
-        for (Apartment nested : subApartment.getSubApartments()) {
-            addSubApartment(nested);
-        }
     }
 
 
@@ -82,6 +75,9 @@ public class Apartment extends Property {
         return fullAddress;
     }
 
+
+
+
     public int getSubCount(){
         return this.subCount;
     }
@@ -89,9 +85,10 @@ public class Apartment extends Property {
 
     @Override
     public String toString() {
-        return "Address: " + getAddress() + ", Price per m²: " + pricePerSqM + "$, Size: " + size + " m², " +
+        return "Address: " + ((getFullAddress().size() >= 2) ? getFullAddress() : getAddress()) + ", Price per m²: " + pricePerSqM + "$, Size: " + size + " m², " +
                 "Total Price : " + calculateTotalPrice() +"$" + " Status: " + (isSold ? "Sold" : "For Sale") + ", Sub-apartments: " + getSubCount();
     }
+
 
 
 
@@ -101,7 +98,7 @@ public class Apartment extends Property {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Apartment other = (Apartment) obj;
-        return Objects.equals(this.getAddress(), other.getAddress()); // Compare addresses
+        return Objects.equals(this.getAddress(), other.getAddress());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package BasicClasses;
 
-import Exceptions.InvalidSearchRadiusException;
-import Exceptions.PropertyNotFoundException;
 import ObserverPattern.Observer;
 import SearchStrategy.SearchStrategy;
 
