@@ -260,8 +260,9 @@ public class Main {
 
                         if (selectedProperty == null) {
                             System.out.println("❌ Property not found or already sold.");
-                        } else {
-
+                        }
+                        else {
+                            List<Integer> full = selectedProperty.getFullAddress();
                             int serviceChoice;
                             String yesOrNo;
 
@@ -305,17 +306,15 @@ public class Main {
                                 };
                                 selectedProperty.settingSeller(seller);
                                 selectedProperty.setSubCount(subs);
-                                selectedProperty.getFullAddress().addAll(address);
 
                                 break;
                             }
                             try {
-
                                 System.out.println("Property Owner is :" + selectedProperty.getOwner().getName()+" The Seller");
                                     seller.sellProperty(broker, selectedProperty, buyer);
                                     updater.updatePropertyStatus(address, filePath);
-                                    System.out.println("✅ " + buyer.getName() + " has purchased: " + selectedProperty.getFullAddress());
-                                    seller.updateBrokers(" Property at " + selectedProperty.getFullAddress() + " has been sold.");
+                                    System.out.println("✅ " + buyer.getName() + " has purchased: " + full);
+                                    seller.updateBrokers(" Property at " + full + " has been sold.");
                                 System.out.println("Property owner is :" +selectedProperty.getOwner().getName()+" The Client");
 
                             } catch (PropertyNotFoundException e) {
